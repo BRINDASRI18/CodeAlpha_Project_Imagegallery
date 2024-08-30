@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+</head>
+<body>
+    <main>
+        <div class="heading">
+            <h1 class="title">Interactive Photo Gallery</h1>
+            <div class="search-box">
+                <select id="categoryFilter" class="filter-dropdown">
+                    <option value="all">All</option>
+                    <option value="toy">Toys</option>
+                    <option value="ice">Ice</option>
+                    <option value="food">Food</option>
+                    <option value="tree">Trees</option>
+                    <option value="mount">Mountains</option>
+                </select>
+            </div>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery" id="photos">
+                <ul>
+                    <!-- Toys -->
+                    <li class="gallery-item toy"><img src="photos/toy1.jpg" alt="Toy 1"></li>
+                    <li class="gallery-item toy"><img src="photos/toy2.jpg" alt="Toy 2"></li>
+                    <li class="gallery-item toy"><img src="photos/toy3.jpg" alt="Toy 3"></li>
+
+                    <!-- Ice -->
+                    <li class="gallery-item ice"><img src="photos/ice1.jpg" alt="Ice 1"></li>
+                    <li class="gallery-item ice"><img src="photos/ice2.jpg" alt="Ice 2"></li>
+                    <li class="gallery-item ice"><img src="photos/ice3.jpg" alt="Ice 3"></li>
+
+                    <!-- Food -->
+                    <li class="gallery-item food"><img src="photos/food1.jpg" alt="Food 1"></li>
+                    <li class="gallery-item food"><img src="photos/food2.jpg" alt="Food 2"></li>
+                    <li class="gallery-item food"><img src="photos/food3.jpg" alt="Food 3"></li>
+
+                    <!-- Trees -->
+                    <li class="gallery-item tree"><img src="photos/tree1.jpg" alt="Tree 1"></li>
+                    <li class="gallery-item tree"><img src="photos/tree2.jpg" alt="Tree 2"></li>
+                    <li class="gallery-item tree"><img src="photos/tree3.jpg" alt="Tree 3"></li>
+
+                    <!-- Mountains -->
+                    <li class="gallery-item mount"><img src="photos/mount1.jpg" alt="Mountain 1"></li>
+                    <li class="gallery-item mount"><img src="photos/mount2.jpg" alt="Mountain 2"></li>
+                    <li class="gallery-item mount"><img src="photos/mount3.jpg" alt="Mountain 3"></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <style>
+        body {
+            font-family: 'Anton', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .heading {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .title {
+            font-size: 2.5rem;
+        }
+
+        .filter-dropdown {
+            padding: 10px;
+            font-size: 1rem;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .gallery-container {
+            padding: 20px;
+        }
+
+        .gallery ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            display: none; /* Hide all images by default */
+            margin: 10px;
+            width: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Default to show all images */
+        .gallery-item.all {
+            display: block;
+        }
+
+        /* Show images based on selected category */
+        .gallery-item.show {
+            display: block;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const categoryFilter = document.getElementById("categoryFilter");
+            const galleryItems = document.querySelectorAll(".gallery-item");
+
+            categoryFilter.addEventListener("change", function () {
+                const selectedCategory = this.value;
+
+                galleryItems.forEach(function (item) {
+                    if (selectedCategory === "all" || item.classList.contains(selectedCategory)) {
+                        item.classList.add("show");
+                    } else {
+                        item.classList.remove("show");
+                    }
+                });
+            });
+
+            // Trigger the change event to show the default (all images)
+            categoryFilter.dispatchEvent(new Event("change"));
+        });
+    </script>
+</body>
+</html>
